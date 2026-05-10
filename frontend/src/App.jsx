@@ -5,6 +5,7 @@ import Challenges from "./challenges/Challenges";
 import History from "./history/History";
 import Stats from "./stats/Stats";
 import Badges from "./badges/Badges";
+import Reminder from "./reminder/Reminder";
 
 // ── Verifica sessão ANTES de montar o SolidJS ──────────────────────
 // (executado no index.jsx, fora do SolidJS)
@@ -69,6 +70,7 @@ export default function App() {
             <NavLink target="stats">📊 Estatísticas</NavLink>
             <NavLink target="graph">🌐 Grafo</NavLink>
             <NavLink target="badges">🏅 Conquistas</NavLink>
+            <NavLink target="reminder">⏰ Lembrete</NavLink>
             <NavLink target="challenges">🏆 Desafios</NavLink>
           </nav>
           <div class="flex items-center gap-3">
@@ -84,6 +86,7 @@ export default function App() {
         <Show when={page() === "history"}><History /></Show>
         <Show when={page() === "stats"}><Stats /></Show>
         <Show when={page() === "badges"}><Badges /></Show>
+        <Show when={page() === "reminder"}><Reminder /></Show>
         <Show when={page() === "graph"}><Graph /></Show>
         <Show when={page() === "challenges"}><Challenges onUpdate={function (d) { if (d.points !== undefined) setPoints(d.points); if (d.streak !== undefined) setStreak(d.streak); }} /></Show>
       </main>
