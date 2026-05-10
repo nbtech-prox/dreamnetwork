@@ -54,7 +54,7 @@ export default function App() {
   var NavLink = function (p) {
     return (
       <button onClick={function () { setPage(p.target); }}
-        class={"px-3 py-1.5 rounded-lg text-sm transition-colors " + (page() === p.target ? "bg-dream-600/30 text-dream-300" : "text-gray-400 hover:text-gray-200")}>{p.children}</button>
+        class={"px-2 py-1 text-xs rounded-lg transition-colors whitespace-nowrap " + (page() === p.target ? "bg-dream-600/30 text-dream-300" : "text-gray-500 hover:text-gray-200")}>{p.children}</button>
     );
   };
 
@@ -65,22 +65,15 @@ export default function App() {
           <button onClick={function () { setPage("home"); }} class="flex items-center gap-2 text-lg font-bold text-dream-300 hover:text-dream-200">
             <span>🌙</span><span class="hidden sm:inline">Dream Network</span>
           </button>
-          <nav class="flex items-center gap-1 overflow-x-auto scrollbar-none" style="-webkit-overflow-scrolling:touch;scrollbar-width:none">
+          <nav class="flex items-center gap-1 flex-wrap justify-end">
             <NavLink target="diary">📓 Diário</NavLink>
-            <NavLink target="history">📋 Histórico</NavLink>
-            <NavLink target="stats">📊 Estatísticas</NavLink>
+            <NavLink target="history">📋 Registo</NavLink>
+            <NavLink target="stats">📊 Stats</NavLink>
             <NavLink target="graph">🌐 Grafo</NavLink>
-            <div class="relative group">
-              <button class="px-2 py-1.5 rounded-lg text-sm text-gray-400 hover:text-gray-200 transition-colors whitespace-nowrap">
-                Mais ▾
-              </button>
-              <div class="absolute right-0 top-full mt-1 bg-gray-900 border border-gray-700 rounded-xl shadow-xl py-2 min-w-[180px] hidden group-hover:block z-50">
-                <button onClick={function(){setPage("badges");}} class="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors">🏅 Conquistas</button>
-                <button onClick={function(){setPage("reminder");}} class="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors">⏰ Lembrete</button>
-                <button onClick={function(){setPage("focus");}} class="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors">🌙 Foco</button>
-                <button onClick={function(){setPage("challenges");}} class="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors">🏆 Desafios</button>
-              </div>
-            </div>
+            <NavLink target="badges">🏅 Badges</NavLink>
+            <NavLink target="reminder">⏰ Alarme</NavLink>
+            <NavLink target="focus">🌙 Foco</NavLink>
+            <NavLink target="challenges">🏆 Meta</NavLink>
           </nav>
           <div class="flex items-center gap-3">
             <span class="hidden sm:inline text-sm text-gray-400">{user()?.username}</span>
