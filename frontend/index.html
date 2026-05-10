@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dream Network — Rede Social de Sonhos</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-gray-950 text-gray-100 min-h-screen">
+    <div id="root"></div>
+    <script>
+      // ── Login/Register handler (capture phase) ──────────────────
+      document.addEventListener("click", function (e) {
+        var btn = e.target;
+        if (btn.id !== "login-btn") return;
+
+        var user = document.getElementById("login-user");
+        var pass = document.getElementById("login-pass");
+        var confirm = document.getElementById("login-confirm");
+        var title = document.getElementById("login-subtitle");
+
+        if (!user || !pass) return;
+        var username = user.value.trim();
+        var password = pass.value;
+        if (!username || password.length < 6) return;
+
+        // É registo?
+        var isReg = title && title.textContent.includes("Junte-se");
+        if (isReg) {
+          if (!confirm || password !== confirm.value) {
+            alert("As senhas não coincidem.");
+            return;
+          }
+        }
+
+        btn.disabled = true;
+        btn.textContent = "A processar…";
+
+        var endpoint = isReg ? "/api/auth/register" : "/api/auth/login";
+
+        fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: username, password: password }),
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data.token) {
+              sessionStorage.setItem("dream_token", data.token);
+              sessionStorage.setItem("dream_password", password);
+              window.location.reload();
+            } else {
+              btn.disabled = false;
+              btn.textContent = isReg ? "🌙 Registrar" : "✨ Entrar";
+              alert("Erro: " + (data.detail || "Erro desconhecido"));
+            }
+          })
+          .catch(function () {
+            btn.disabled = false;
+            btn.textContent = isReg ? "🌙 Registrar" : "✨ Entrar";
+            alert("Erro de conexão ao servidor");
+          });
+      }, true);
+    </script>
+    <script type="module" src="/src/index.jsx"></script>
+  </body>
+</html>

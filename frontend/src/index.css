@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonte base */
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* Transições suaves */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar escura */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+
+/* Tooltip / Toast */
+.toast {
+  @apply fixed bottom-6 right-6 px-6 py-3 rounded-lg shadow-xl text-sm font-medium z-50 transition-all duration-300;
+}
+.toast-success {
+  @apply bg-green-700 text-white;
+}
+.toast-error {
+  @apply bg-red-700 text-white;
+}
+.toast-info {
+  @apply bg-blue-700 text-white;
+}
