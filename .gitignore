@@ -24,3 +24,4 @@ Thumbs.db
 
 # Docker
 /backend/alembic/versions/*.pyc
+dump.rdb
