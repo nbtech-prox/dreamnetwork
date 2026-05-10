@@ -2,6 +2,7 @@ import { createSignal, Show } from "solid-js";
 import Diary from "./diary/Diary";
 import Graph from "./explore/Graph";
 import Challenges from "./challenges/Challenges";
+import History from "./history/History";
 
 // ── Verifica sessão ANTES de montar o SolidJS ──────────────────────
 // (executado no index.jsx, fora do SolidJS)
@@ -62,6 +63,7 @@ export default function App() {
           </button>
           <nav class="flex items-center gap-4">
             <NavLink target="diary">📓 Diário</NavLink>
+            <NavLink target="history">📋 Histórico</NavLink>
             <NavLink target="graph">🌐 Grafo</NavLink>
             <NavLink target="challenges">🏆 Desafios</NavLink>
           </nav>
@@ -75,6 +77,7 @@ export default function App() {
       <main class="flex-1 max-w-4xl mx-auto w-full py-6">
         <Show when={page() === "home"}><HomePage points={points} streak={streak} onNavigate={setPage} /></Show>
         <Show when={page() === "diary"}><Diary password={password} points={points} streak={streak} sharedToday={sharedToday} onUpdate={function (d) { if (d.points !== undefined) setPoints(d.points); if (d.streak !== undefined) setStreak(d.streak); }} /></Show>
+        <Show when={page() === "history"}><History /></Show>
         <Show when={page() === "graph"}><Graph /></Show>
         <Show when={page() === "challenges"}><Challenges onUpdate={function (d) { if (d.points !== undefined) setPoints(d.points); if (d.streak !== undefined) setStreak(d.streak); }} /></Show>
       </main>
